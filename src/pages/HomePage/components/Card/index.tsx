@@ -7,7 +7,14 @@ import DropShadow from 'react-native-drop-shadow';
 const AgentCard = ({agente}: AgentProps) => {
   const {navigate} = useNavigation();
 
+  console.log(agente);
+
   const handlePress = useCallback(() => {
+    navigate('Agente', {
+      params: {
+        uuid: agente.uuid,
+      },
+    });
     console.log('click');
   }, [navigate]);
 
@@ -22,13 +29,21 @@ const AgentCard = ({agente}: AgentProps) => {
         shadowOpacity: 0.12,
         shadowRadius: 3,
       }}>
-      <S.AgentContainer onPress={handlePress}>
+      <S.Container onPress={handlePress} key={agente.uuid}>
         <S.AgentImage source={{uri: agente.displayIconSmall}} />
-        <S.AgentText>
+        <S.AgentAreaText>
           <S.AgentTitle>{agente.displayName}</S.AgentTitle>
-          <S.AgentDescription>{agente.description}</S.AgentDescription>
-        </S.AgentText>
-      </S.AgentContainer>
+          <S.AgentDescription>{agente.role.displayName}</S.AgentDescription>
+          <S.AbilityContainer>
+            {agente.abilities.map(
+              ability =>
+                ability.displayIcon && (
+                  <S.IconImage source={{uri: ability.displayIcon}} />
+                ),
+            )}
+          </S.AbilityContainer>
+        </S.AgentAreaText>
+      </S.Container>
     </DropShadow>
   );
 };
