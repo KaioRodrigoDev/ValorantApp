@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import {AppParamList} from '@Types/routes/app';
 import HomePage from '@Pages/HomePage';
+import AgentPage from '@Pages/AgentPage';
 
 const Stack = createStackNavigator<AppParamList>();
 
@@ -19,6 +20,7 @@ const App = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen name="Agente" component={AgentPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
