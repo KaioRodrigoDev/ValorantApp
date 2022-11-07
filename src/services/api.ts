@@ -5,6 +5,7 @@ const API_SERVICE = axios.create({
   timeout: 2000,
   params: {
     language: 'pt-BR',
+    isPlayableCharacter: true,
   },
 });
 
