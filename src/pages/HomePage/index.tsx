@@ -10,7 +10,7 @@
 
 import React, {useEffect, type PropsWithChildren, useCallback} from 'react';
 import {useState} from 'react';
-import {SafeAreaView, ScrollView} from 'react-native';
+import {ActivityIndicator, ScrollView} from 'react-native';
 
 import API_SERVICE from '@Api/api';
 import AgentCard from './components/Card';
@@ -28,10 +28,14 @@ const HomePage = () => {
     });
   }, []);
 
+  if (!agentes) {
+    return <ActivityIndicator size="large" />;
+  }
+
   return (
     <S.HomeContainer>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {agentes?.data?.map(agente => (
+        {agentes.data.map(agente => (
           <AgentCard agente={agente} />
         ))}
       </ScrollView>
