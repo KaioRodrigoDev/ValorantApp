@@ -15,15 +15,7 @@ export const Container = styled(LinearGradient).attrs({
   border-radius: 10px;
 `;
 
-export const AgentContainer = styled.TouchableOpacity`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: white;
-`;
+export const AgentContainer = styled.TouchableOpacity``;
 
 export const AgentImage = styled.Image`
   width: 100px;

@@ -24,26 +24,28 @@ const AgentCard = ({agente}: AgentProps) => {
         shadowColor: '#000',
         shadowOffset: {
           width: 0,
-          height: 4,
+          height: 5,
         },
-        shadowOpacity: 0.12,
+        shadowOpacity: 0.5,
         shadowRadius: 3,
       }}>
-      <S.Container onPress={handlePress} key={agente.uuid}>
-        <S.AgentImage source={{uri: agente.displayIconSmall}} />
-        <S.AgentAreaText>
-          <S.AgentTitle>{agente.displayName}</S.AgentTitle>
-          <S.AgentDescription>{agente.role.displayName}</S.AgentDescription>
-          <S.AbilityContainer>
-            {agente.abilities.map(
-              ability =>
-                ability.displayIcon && (
-                  <S.IconImage source={{uri: ability.displayIcon}} />
-                ),
-            )}
-          </S.AbilityContainer>
-        </S.AgentAreaText>
-      </S.Container>
+      <S.AgentContainer onPress={handlePress}>
+        <S.Container key={agente.uuid}>
+          <S.AgentImage source={{uri: agente.displayIconSmall}} />
+          <S.AgentAreaText>
+            <S.AgentTitle>{agente.displayName}</S.AgentTitle>
+            <S.AgentDescription>{agente.role.displayName}</S.AgentDescription>
+            <S.AbilityContainer>
+              {agente.abilities.map(
+                ability =>
+                  ability.displayIcon && (
+                    <S.IconImage source={{uri: ability.displayIcon}} />
+                  ),
+              )}
+            </S.AbilityContainer>
+          </S.AgentAreaText>
+        </S.Container>
+      </S.AgentContainer>
     </DropShadow>
   );
 };
