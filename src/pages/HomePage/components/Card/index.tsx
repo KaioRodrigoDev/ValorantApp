@@ -1,11 +1,14 @@
 import React, {useCallback} from 'react';
 import * as S from './style';
-import {AgentProps} from '@Types/agents';
+import {AbilitiesProps, CardAgentProps} from '@Types/agents';
 import {useNavigation} from '@react-navigation/native';
 import DropShadow from 'react-native-drop-shadow';
+import {AppParamList} from '@Types/routes/app';
+import {StackNavigationProp} from '@react-navigation/stack';
 
-const AgentCard = ({agente}: AgentProps) => {
-  const {navigate} = useNavigation();
+const AgentCard = ({agente}: CardAgentProps) => {
+  const {navigate} =
+    useNavigation<StackNavigationProp<AppParamList, 'Agente'>>();
 
   console.log(agente);
 
@@ -16,10 +19,11 @@ const AgentCard = ({agente}: AgentProps) => {
       },
     });
     console.log('click');
-  }, [navigate]);
+  }, [agente, navigate]);
 
   return (
     <DropShadow
+      // eslint-disable-next-line react-native/no-inline-styles
       style={{
         shadowColor: '#000',
         shadowOffset: {
@@ -37,7 +41,7 @@ const AgentCard = ({agente}: AgentProps) => {
             <S.AgentDescription>{agente.role.displayName}</S.AgentDescription>
             <S.AbilityContainer>
               {agente.abilities.map(
-                ability =>
+                (ability: AbilitiesProps) =>
                   ability.displayIcon && (
                     <S.IconImage source={{uri: ability.displayIcon}} />
                   ),

@@ -1,11 +1,24 @@
 import styled from 'styled-components/native';
 
-export const HomeContainer = styled.SafeAreaView``;
+export const HomeContainer = styled.SafeAreaView`
+  height: 100%;
+  background-color: #101823;
+`;
 
 export const AgentImage = styled.Image`
   width: 100%;
-  height: 400px;
-  max-width: 100%;
+  height: 200px;
+  max-width: 50%;
+  align-self: center;
+  margin-top: 25px;
+`;
+
+export const AgentName = styled.Text`
+  font-family: 'valorant';
+  font-size: 35px;
+  color: white;
+  align-self: center;
+  margin: 25px 0px;
 `;
 
 export const HabilityContainer = styled.View`

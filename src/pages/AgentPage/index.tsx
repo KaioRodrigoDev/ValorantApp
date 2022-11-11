@@ -10,16 +10,18 @@
 
 import React, {useState, useEffect} from 'react';
 
-import DropShadow from 'react-native-drop-shadow';
+import {ActivityIndicator} from 'react-native';
 
-import {ScrollView, Text, SafeAreaView, Image, View} from 'react-native';
+import {ScrollView} from 'react-native';
 
 import * as S from './style';
 
 import API_SERVICE from '@Api/api';
+import AbilityCard from './components/ability';
+import {AgentProps} from '@Types/agents';
 
-const AgentPage = ({route}) => {
-  const [agente, setAgente] = useState();
+const AgentPage = ({route}: any) => {
+  const [agente, setAgente] = useState<AgentProps>();
   let id = route.params.params.uuid;
   useEffect(() => {
     API_SERVICE.get(id).then(response => {
@@ -28,37 +30,24 @@ const AgentPage = ({route}) => {
     });
   }, [id]);
 
-  return (
-    <SafeAreaView style={{height: '100%'}}>
-      <ScrollView showsVerticalScrollIndicator={false} style={{height: '100%'}}>
-        <S.AgentImage source={{uri: agente?.fullPortrait}} />
-        <Text>{agente?.displayName}</Text>
-        {agente?.abilities?.map(hability => (
-          <DropShadow
-            style={{
-              shadowColor: '#000',
-              shadowOffset: {
-                width: 0,
-                height: 4,
-              },
-              shadowOpacity: 0.12,
-              shadowRadius: 3,
-            }}>
-            <S.HabilityContainer>
-              <Image
-                source={{uri: hability.displayIcon}}
-                style={{height: 100, width: 100}}
-              />
-              <S.HabilityTitle>{hability.displayName}</S.HabilityTitle>
+  if (!agente) {
+    return (
+      <S.HomeContainer>
+        <ActivityIndicator size="large" />
+      </S.HomeContainer>
+    );
+  }
 
-              <S.HabilityDescription>
-                {hability.description}
-              </S.HabilityDescription>
-            </S.HabilityContainer>
-          </DropShadow>
+  return (
+    <S.HomeContainer>
+      <ScrollView showsVerticalScrollIndicator={false} style={{height: '100%'}}>
+        <S.AgentImage source={{uri: agente.displayIconSmall}} />
+        <S.AgentName>{agente.displayName}</S.AgentName>
+        {agente.abilities.map(ability => (
+          <AbilityCard abilities={ability} />
         ))}
       </ScrollView>
-    </SafeAreaView>
+    </S.HomeContainer>
   );
 };
 
