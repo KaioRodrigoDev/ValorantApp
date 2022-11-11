@@ -20,7 +20,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen name="Agente" component={AgentPage} />
+        <Stack.Screen
+          name="Agente"
+          component={AgentPage}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
